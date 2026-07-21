@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
@@ -5,24 +6,31 @@
 :root {
   --background: #f8fafc;
   --foreground: #0f172a;
-  --primary: #0f766e; /* Turquoise / Teal 700 */
+  --primary: #0f766e;
+  /* Turquoise / Teal 700 */
   --primary-foreground: #ffffff;
-  --secondary: #0369a1; /* Ramadan Blue / Sky 700 */
+  --secondary: #0369a1;
+  /* Ramadan Blue / Sky 700 */
   --secondary-foreground: #ffffff;
-  --accent: #059669; /* Emerald 600 */
+  --accent: #059669;
+  /* Emerald 600 */
   --card: #ffffff;
   --card-foreground: #0f172a;
   --border: #e2e8f0;
 }
 
 .dark {
-  --background: #020617; /* Very dark blue/slate */
+  --background: #020617;
+  /* Very dark blue/slate */
   --foreground: #f8fafc;
-  --primary: #2dd4bf; /* Turquoise / Teal 400 */
+  --primary: #2dd4bf;
+  /* Turquoise / Teal 400 */
   --primary-foreground: #022c22;
-  --secondary: #38bdf8; /* Ramadan Blue / Sky 400 */
+  --secondary: #38bdf8;
+  /* Ramadan Blue / Sky 400 */
   --secondary-foreground: #082f49;
-  --accent: #34d399; /* Emerald 400 */
+  --accent: #34d399;
+  /* Emerald 400 */
   --card: #0f172a;
   --card-foreground: #f8fafc;
   --border: #1e293b;
