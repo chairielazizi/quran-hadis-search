@@ -44,16 +44,30 @@ async function main() {
 
     // 1. Dapatkan senarai ayat yang sudah ada di dalam pangkalan data untuk mengelakkan duplikasi
     console.log("🔍 Menyemak pangkalan data untuk ayat yang telah diproses...");
-    const { data: existingData, error: fetchError } = await supabase
-      .from("quran_verses")
-      .select("surah_id, verse_id");
+    
+    let allExistingData: any[] = [];
+    let from = 0;
+    const pageSize = 1000;
 
-    if (fetchError) {
-      throw new Error(`Gagal menyemak pangkalan data: ${fetchError.message}`);
+    while (true) {
+      const { data, error: fetchError } = await supabase
+        .from("quran_verses")
+        .select("surah_id, verse_id")
+        .range(from, from + pageSize - 1);
+
+      if (fetchError) {
+        throw new Error(`Gagal menyemak pangkalan data: ${fetchError.message}`);
+      }
+
+      if (!data || data.length === 0) break;
+      
+      allExistingData.push(...data);
+      if (data.length < pageSize) break;
+      from += pageSize;
     }
 
-    const existingVerses = new Set(existingData?.map((v) => `${v.surah_id}:${v.verse_id}`) || []);
-    console.log(`✅ Terdapat ${existingVerses.size} ayat yang sudah siap diproses.`);
+    const existingVerses = new Set(allExistingData.map((v) => `${v.surah_id}:${v.verse_id}`));
+    console.log(`✅ Terdapat ${existingVerses.size} ayat unik yang sudah siap diproses.`);
 
     // proses secara berkumpulan (batch) untuk elak Limit API
     const batchSize = 90;
