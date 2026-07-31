@@ -11,7 +11,7 @@ const genAI = new GoogleGenerativeAI(geminiApiKey);
 
 export async function POST(req: Request) {
   try {
-    const { query } = await req.json();
+    const { query, type = "quran" } = await req.json();
 
     if (!query) {
       return NextResponse.json({ error: "Query is required" }, { status: 400 });
@@ -22,23 +22,26 @@ export async function POST(req: Request) {
     const result = await model.embedContent(query);
     const embedding = result.embedding.values;
 
-    // 2. Call Supabase RPC to find similar verses
+    // 2. Call Supabase RPC to find similar verses/hadiths
     // Match threshold is lowered for testing (e.g., 0.2)
-    const { data: verses, error } = await supabase.rpc("match_quran_verses", {
+    const rpcName = type === "hadith" ? "match_hadith_entries" : "match_quran_verses";
+    const { data: results, error } = await supabase.rpc(rpcName, {
       query_embedding: embedding,
       match_threshold: 0.2,
-      match_count: 5,
+      match_count: 10,
     });
 
     if (error) {
-      console.error("Supabase RPC error:", error);
-      return NextResponse.json({ error: "Database search failed" }, { status: 500 });
+      console.error(`Supabase RPC error (${rpcName}):`, error);
+      return NextResponse.json({ error: "Gagal mencari data di pangkalan data." }, { status: 500 });
     }
 
-    return NextResponse.json({ results: verses });
-
+    return NextResponse.json({ results });
   } catch (error: any) {
     console.error("Search API error:", error);
-    return NextResponse.json({ error: error.message || "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Ralat pada pelayan semasa melakukan carian." },
+      { status: 500 }
+    );
   }
 }
