@@ -90,7 +90,7 @@ async function main() {
 
       // Menggunakan teks terjemahan untuk menjana vektor, kerana ia lebih berkesan untuk carian
       const requests = hadithsToProcess.map(h => ({
-        content: { parts: [{ text: `Hadis Bukhari ${h.arabic.hadithnumber}: ${h.malay.text}` }] }
+        content: { role: "user", parts: [{ text: `Hadis Bukhari ${h.arabic.hadithnumber}: ${h.malay.text}` }] }
       }));
 
       let retries = 168; // 7 hari

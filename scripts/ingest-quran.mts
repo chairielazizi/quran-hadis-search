@@ -94,7 +94,7 @@ async function main() {
       console.log(`🤖 Menjana embedding secara pukal (Batching) untuk ${versesToProcess.length} ayat...`);
 
       const requests = versesToProcess.map(v => ({
-        content: { parts: [{ text: `Surah ${v.arabic.chapter}, Ayat ${v.arabic.verse}: ${v.malay.text}` }] }
+        content: { role: "user", parts: [{ text: `Surah ${v.arabic.chapter}, Ayat ${v.arabic.verse}: ${v.malay.text}` }] }
       }));
 
       let retries = 168; // Cuba selama 7 hari (1 jam sekali)
