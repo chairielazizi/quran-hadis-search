@@ -144,6 +144,9 @@ export default function Home() {
             <span className="text-muted-foreground">{t.popular}</span>
             <span onClick={() => handleSearch(undefined, language === "ms" ? "Jalan yang lurus" : "The straight path")} className="px-3 py-1.5 rounded-full bg-secondary/10 text-secondary border border-secondary/20 cursor-pointer hover:bg-secondary/20 transition-colors">{language === "ms" ? "Jalan yang lurus" : "Straight path"}</span>
             <span onClick={() => handleSearch(undefined, language === "ms" ? "Kisah umat terdahulu" : "Stories of the past nations")} className="px-3 py-1.5 rounded-full bg-accent/10 text-accent border border-accent/20 cursor-pointer hover:bg-accent/20 transition-colors">{language === "ms" ? "Umat terdahulu" : "Past nations"}</span>
+            <span onClick={() => handleSearch(undefined, language === "ms" ? "Sifat orang beriman" : "Characteristics of believers")} className="px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 cursor-pointer hover:bg-primary/20 transition-colors">{language === "ms" ? "Sifat orang beriman" : "Believers' traits"}</span>
+            <span onClick={() => handleSearch(undefined, language === "ms" ? "Hari Kiamat" : "Day of Judgment")} className="px-3 py-1.5 rounded-full bg-secondary/10 text-secondary border border-secondary/20 cursor-pointer hover:bg-secondary/20 transition-colors">{language === "ms" ? "Hari Kiamat" : "Day of Judgment"}</span>
+            <span onClick={() => handleSearch(undefined, language === "ms" ? "Keutamaan bersedekah" : "Virtues of charity")} className="px-3 py-1.5 rounded-full bg-accent/10 text-accent border border-accent/20 cursor-pointer hover:bg-accent/20 transition-colors">{language === "ms" ? "Keutamaan sedekah" : "Charity virtues"}</span>
           </div>
         </div>
 
@@ -203,7 +206,7 @@ export default function Home() {
 
       <footer className="border-t border-border/40 py-6 text-center text-sm text-muted-foreground bg-card/50 mt-12 flex flex-col gap-1">
         <p>&copy; {new Date().getFullYear()} Chairiel Azizi. {language === "ms" ? "Hak cipta terpelihara." : "All rights reserved."}</p>
-        <p>{t.footer}</p>
+        <p className="px-2 sm:px-0">{t.footer}</p>
       </footer>
     </div>
   );
