@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { Search, BookOpen, Sparkles, Loader2, BookText, Globe } from "lucide-react";
+import { Search, BookOpen, Sparkles, Loader2, BookText } from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -10,7 +10,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchType, setSearchType] = useState<"quran" | "hadith">("quran");
-  const [language, setLanguage] = useState<"ms" | "en">("ms");
+  const { language } = useLanguage();
 
   const texts = {
     ms: {
@@ -74,25 +74,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-primary">
-            <BookOpen className="h-6 w-6" />
-            <span className="font-bold text-xl tracking-tight">Quran<span className="text-secondary">Context</span></span>
-          </div>
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setLanguage(language === "ms" ? "en" : "ms")}
-              className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors px-2 py-1"
-            >
-              <Globe className="w-4 h-4" />
-              {language.toUpperCase()}
-            </button>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
+    <div className="flex flex-col flex-1 w-full">
 
       <main className="flex-1 flex flex-col items-center py-12 px-4 relative overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10 mix-blend-multiply dark:mix-blend-lighten animate-pulse" />
@@ -105,14 +87,14 @@ export default function Home() {
             <div className="bg-secondary/10 p-1 rounded-2xl flex gap-1 border border-secondary/20">
               <button
                 onClick={() => { setSearchType("quran"); setResults([]); }}
-                className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-medium transition-all ${searchType === "quran" ? "bg-background shadow-sm text-primary" : "text-muted-foreground hover:text-foreground"}`}
+                className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-medium transition-all cursor-pointer ${searchType === "quran" ? "bg-background shadow-sm text-primary" : "text-muted-foreground hover:text-foreground"}`}
               >
                 <BookOpen className="w-4 h-4" />
                 {t.quranTab}
               </button>
               <button
                 onClick={() => { setSearchType("hadith"); setResults([]); }}
-                className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-medium transition-all ${searchType === "hadith" ? "bg-background shadow-sm text-primary" : "text-muted-foreground hover:text-foreground"}`}
+                className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-medium transition-all cursor-pointer ${searchType === "hadith" ? "bg-background shadow-sm text-primary" : "text-muted-foreground hover:text-foreground"}`}
               >
                 <BookText className="w-4 h-4" />
                 {t.hadithTab}
@@ -151,7 +133,7 @@ export default function Home() {
               <button
                 type="submit"
                 disabled={loading}
-                className="h-full px-6 bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors flex-shrink-0 disabled:opacity-70 flex items-center gap-2"
+                className="h-full px-6 bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors flex-shrink-0 disabled:opacity-70 flex items-center gap-2 cursor-pointer"
               >
                 {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : t.searchBtn}
               </button>
