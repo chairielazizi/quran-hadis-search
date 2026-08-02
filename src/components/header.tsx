@@ -13,7 +13,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity cursor-pointer">
-          <Image src="/logo.png" alt="QuranHadisContext Logo" width={32} height={32} className="rounded-md" />
+          <Image src="/logo.png" alt="QuranHadisContext Logo" width={48} height={48} className="rounded-md" />
           <span className="font-bold text-xl tracking-tight">Quran<span className="text-secondary">Hadis</span><span className="text-accent">Context</span></span>
         </Link>
         <div className="flex items-center gap-4">

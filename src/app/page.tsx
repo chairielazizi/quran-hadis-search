@@ -81,7 +81,7 @@ export default function Home() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -z-10 mix-blend-multiply dark:mix-blend-lighten" />
 
         <div className="w-full max-w-3xl space-y-8 text-center transition-all duration-500 ease-in-out" style={{ marginTop: results.length > 0 ? '0' : '5vh' }}>
-          
+
           {/* Tabs */}
           <div className="flex justify-center mb-6">
             <div className="bg-secondary/10 p-1 rounded-2xl flex gap-1 border border-secondary/20">
@@ -171,7 +171,7 @@ export default function Home() {
                   <div className="relative z-10 flex flex-col gap-4">
                     <div className="flex items-center justify-between">
                       <span className="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-xs font-bold tracking-wider shadow-sm uppercase">
-                        {searchType === "quran" 
+                        {searchType === "quran"
                           ? `SURAH ${item.surah_id} : ${language === "ms" ? "AYAT" : "VERSE"} ${item.verse_id}`
                           : `SAHIH ${item.collection_name} : ${language === "ms" ? "HADIS" : "HADITH"} ${item.hadith_number}`}
                       </span>
@@ -201,7 +201,8 @@ export default function Home() {
         )}
       </main>
 
-      <footer className="border-t border-border/40 py-6 text-center text-sm text-muted-foreground bg-card/50 mt-12">
+      <footer className="border-t border-border/40 py-6 text-center text-sm text-muted-foreground bg-card/50 mt-12 flex flex-col gap-1">
+        <p>&copy; {new Date().getFullYear()} Chairiel Azizi. {language === "ms" ? "Hak cipta terpelihara." : "All rights reserved."}</p>
         <p>{t.footer}</p>
       </footer>
     </div>
