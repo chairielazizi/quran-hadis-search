@@ -10,14 +10,13 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function checkDb() {
   const { count, error } = await supabase
-    .from("hadiths")
-    .select("*", { count: "exact", head: true })
-    .eq("collection", "bukhari");
+    .from("hadith_entries")
+    .select("*", { count: "exact", head: true });
   
   if (error) {
     console.error("Error checking DB:", error);
   } else {
-    console.log(`Total Hadith Bukhari in DB: ${count}`);
+    console.log(`Total Semua Hadis Dalam Pangkalan Data: ${count}`);
   }
 }
 
