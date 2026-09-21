@@ -2,8 +2,8 @@ name: Keep Supabase Alive
 
 on:
   schedule:
-    # Akan berjalan setiap 3 hari pada pukul 12 tengah malam (UTC)
-    - cron: '0 0 */3 * *'
+    # Akan berjalan setiap 2 hari pada pukul 12 tengah malam (UTC)
+    - cron: '0 0 */2 * *'
   # Membenarkan anda menekan butang "Run workflow" secara manual di Github Actions
   workflow_dispatch: 
 
@@ -23,9 +23,9 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Ping Supabase (Run check-db.mts)
+      - name: Ping Supabase (Run keep-alive.mts)
         env:
           # Membaca nilai dari Github Settings > Secrets and variables > Actions
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-        run: npx tsx scripts/check-db.mts
+        run: npx tsx scripts/keep-alive.mts
